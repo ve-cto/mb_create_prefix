@@ -15,7 +15,7 @@ body {
 /* Navigation Bar */
 .navbar {
     width: 100%;
-    background-color: rgba(255, 255, 255, 0.705); /* Semi-transparent background */
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
     position: fixed;
     top: 0;
     display: flex;

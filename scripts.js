@@ -1,12 +1,3 @@
-document.getElementById("hasTransition").addEventListener("input", function() {
-    const transitionDiv = document.getElementById("transitionColourDiv");
-    if (this.value.toLowerCase() === "yes") {
-        transitionDiv.style.display = "block";
-    } else {
-        transitionDiv.style.display = "none";
-    }
-});
-
 function generateRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -22,6 +13,20 @@ function setRandomBackground() {
     document.body.style.setProperty('--colourA', colourA);
     document.body.style.setProperty('--colourB', colourB);
 }
+
+// Call setRandomBackground on page load for all pages
+window.onload = function() {
+    setRandomBackground();
+};
+
+document.getElementById("hasTransition").addEventListener("input", function() {
+    const transitionDiv = document.getElementById("transitionColourDiv");
+    if (this.value.toLowerCase() === "yes") {
+        transitionDiv.style.display = "block";
+    } else {
+        transitionDiv.style.display = "none";
+    }
+});
 
 function generatePrefix() {
     let resultText = "";
@@ -76,9 +81,4 @@ function copyToClipboard(elementId) {
     }).catch(function(err) {
         console.error('Failed to copy text: ', err);
     });
-}
-
-// Set a random gradient background on page load
-window.onload = function() {
-    setRandomBackground; 
 }
