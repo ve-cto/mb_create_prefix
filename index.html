@@ -32,6 +32,7 @@
     </form>
 
     <p id="result"></p>
+    <p id="command"></p>
 
     <script>
         document.getElementById("hasTransition").addEventListener("input", function() {
@@ -76,12 +77,12 @@
             }
 
             document.getElementById("result").textContent = `This is the resulting prefix: ${resultText}`;
-            console.log("This is the command to change their prefix.");
-            console.log(`/lp user ${username} meta setprefix ${resultText}`);
+            document.getElementById("command").textContent = "This is the command to change their prefix: `/lp user ${username} meta setprefix ${resultText}`";
+            // console.log(`/lp user ${username} meta setprefix ${resultText}`);
         }
 
         // Call the function with example values for testing
-        generatePrefix('kenobi_luke', 'Coach', 'red', 'brightturquoise', 'yes', '6fe37f');
+        // generatePrefix('kenobi_luke', 'Coach', 'red', 'brightturquoise', 'yes', '6fe37f');
     </script>
 </body>
 </html>
