@@ -1,0 +1,93 @@
+@import url('https://fonts.googleapis.com/css2?family=Ginto:wght@400;700&display=swap');
+
+body {
+    background: linear-gradient(20deg, var(--colourA), var(--colourB));
+    background-size: 100% 100%;
+    color: #FAEBD7; /* Antique White */
+    font-family: 'Ginto', sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Navigation Bar */
+.navbar {
+    width: 100%;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background */
+    position: fixed;
+    top: 0;
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    box-sizing: border-box;
+}
+.navbar a {
+    color: #FAEBD7; /* Antique White */
+    text-decoration: none;
+    font-size: 1.2em;
+    display: flex;
+    align-items: center;
+}
+.navbar a img {
+    margin-right: 10px;
+}
+
+button {
+    margin-top: 10px;
+    padding: 10px 20px;
+    background-color: #FF8811; /* Bright Orange */
+    color: white;
+    border: none;
+    border-radius: 12px;
+    cursor: pointer;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out, background-color 0.3s;
+}
+button:hover {
+    background-color: #CC6F00; /* Darker Orange */
+}
+input[type="text"] {
+    background-color: #392F5A; /* Dark Purple */
+    color: #FAEBD7; /* Antique White */
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    font-size: 1.1em;
+    width: 80%; /* Reduced width */
+    box-sizing: border-box;
+}
+input[type="button"] {
+    background-color: #FF8811; /* Bright Orange */
+    color: #FAEBD7; /* Antique White */
+    border: none;
+    border-radius: 12px;
+    padding: 10px;
+    margin-top: 20px; /* Add margin-top for padding */
+    width: 100%;
+    box-sizing: border-box;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+input[type="button"]:hover {
+    background-color: #CC6F00; /* Darker Orange */
+}
+label {
+    display: block;
+    margin-top: 10px;
+}
+#resultContainer {
+    height: 0;
+    overflow: hidden;
+    opacity: 0;
+    transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+.container {
+    text-align: center;
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
