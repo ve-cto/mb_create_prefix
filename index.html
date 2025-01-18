@@ -4,35 +4,88 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prefix Generator</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Ginto:wght@400;700&display=swap');
+
+        body {
+            background: linear-gradient(20deg, #003049, #D62828);
+            background-size: cover;
+            color: #EAE2B7;
+            font-family: 'Ginto', sans-serif;
+        }
+        button {
+            margin-top: 10px;
+            padding: 10px 20px;
+            background-color: #FCBF49;
+            color: white;
+            border: none;
+            border-radius: 12px;
+            cursor: pointer;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+        button:hover {
+            background-color: #FCA136;
+        }
+        input[type="text"] {
+            background-color: #5C9EAD;
+            color: #EAE2B7;
+            border: none;
+            border-radius: 12px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        input[type="button"] {
+            background-color: #FCBF49;
+            color: #003049;
+            border: none;
+            border-radius: 12px;
+            padding: 10px;
+            width: 100%;
+            box-sizing: border-box;
+            cursor: pointer;
+        }
+        label {
+            display: block;
+            margin-top: 10px;
+        }
+        #result, #command, #copyResultBtn, #copyCommandBtn {
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+        }
+    </style>
 </head>
 <body>
     <h1>Prefix Generator</h1>
     <form id="prefixForm">
         <label for="username">What is the player's username? (e.g., kenobi_luke):</label>
-        <input type="text" id="username" name="username"><br><br>
+        <input type="text" id="username" name="username"><br>
 
         <label for="textToColour">What rank is the player? (e.g., Coach, Trial_Admin, Mod):</label>
-        <input type="text" id="textToColour" name="textToColour"><br><br>
+        <input type="text" id="textToColour" name="textToColour"><br>
 
         <label for="colourA">What is the desired starting colour? (e.g., red, brightturquoise, 6fe37f):</label>
-        <input type="text" id="colourA" name="colourA"><br><br>
+        <input type="text" id="colourA" name="colourA"><br>
 
         <label for="colourB">What is the desired ending colour?</label>
-        <input type="text" id="colourB" name="colourB"><br><br>
+        <input type="text" id="colourB" name="colourB"><br>
 
         <label for="hasTransition">Does the player want a transition colour? (yes/no):</label>
-        <input type="text" id="hasTransition" name="hasTransition"><br><br>
+        <input type="text" id="hasTransition" name="hasTransition"><br>
 
         <div id="transitionColourDiv" style="display: none;">
             <label for="colourC">What is the desired transition colour?</label>
-            <input type="text" id="colourC" name="colourC"><br><br>
+            <input type="text" id="colourC" name="colourC"><br>
         </div>
 
         <input type="button" value="Generate Prefix" onclick="generatePrefix()">
     </form>
 
     <p id="result"></p>
+    <button id="copyResultBtn" onclick="copyToClipboard('result')">Copy Result</button>
     <p id="command"></p>
+    <button id="copyCommandBtn" onclick="copyToClipboard('command')">Copy Command</button>
 
     <script>
         document.getElementById("hasTransition").addEventListener("input", function() {
@@ -76,13 +129,30 @@
                 resultText += `${bracketColour}[${colourA}${split1}${colours[1]}${split2}${colourB}${bracketColour}]§r`;
             }
 
-            document.getElementById("result").textContent = `This is the resulting prefix: ${resultText}`;
-            document.getElementById("command").textContent = `This is the command to change their prefix: /lp user ${username} meta setprefix ${resultText}`;
-            // console.log(`/lp user ${username} meta setprefix ${resultText}`);
+            const resultElement = document.getElementById("result");
+            resultElement.innerHTML = `This is the resulting prefix:<br>${resultText}`;
+            const commandElement = document.getElementById("command");
+            if (commandElement) {
+                commandElement.innerHTML = `This is the command to change their prefix:<br>/lp user ${username} meta setprefix ${resultText}`;
+            } else {
+                console.error("Command element not found.");
+            }
+
+            // Show and animate the result and copy buttons
+            resultElement.style.opacity = 1;
+            document.getElementById("copyResultBtn").style.opacity = 1;
+            commandElement.style.opacity = 1;
+            document.getElementById("copyCommandBtn").style.opacity = 1;
         }
-        // sup 2
-        // Call the function with example values for testing
-        // generatePrefix('kenobi_luke', 'Coach', 'red', 'brightturquoise', 'yes', '6fe37f');
+
+        function copyToClipboard(elementId) {
+            const text = document.getElementById(elementId).innerText;
+            navigator.clipboard.writeText(text).then(function() {
+                console.log('Text copied to clipboard');
+            }).catch(function(err) {
+                console.error('Failed to copy text: ', err);
+            });
+        }
     </script>
 </body>
 </html>
