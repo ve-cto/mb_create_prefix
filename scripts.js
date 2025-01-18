@@ -79,4 +79,6 @@ function copyToClipboard(elementId) {
 }
 
 // Set a random gradient background on page load
-window.onload = setRandomBackground;
+window.onload = function() {
+    setRandomBackground(); 
+}
