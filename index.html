@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefix Generator</title>
+</head>
+<body>
+    <h1>Prefix Generator</h1>
+    <form id="prefixForm">
+        <label for="username">What is the player's username? (e.g., kenobi_luke):</label>
+        <input type="text" id="username" name="username"><br><br>
+
+        <label for="textToColour">What rank is the player? (e.g., Coach, Trial_Admin, Mod):</label>
+        <input type="text" id="textToColour" name="textToColour"><br><br>
+
+        <label for="colourA">What is the desired starting colour? (e.g., red, brightturquoise, 6fe37f):</label>
+        <input type="text" id="colourA" name="colourA"><br><br>
+
+        <label for="colourB">What is the desired ending colour?</label>
+        <input type="text" id="colourB" name="colourB"><br><br>
+
+        <label for="hasTransition">Does the player want a transition colour? (yes/no):</label>
+        <input type="text" id="hasTransition" name="hasTransition"><br><br>
+
+        <div id="transitionColourDiv" style="display: none;">
+            <label for="colourC">What is the desired transition colour?</label>
+            <input type="text" id="colourC" name="colourC"><br><br>
+        </div>
+
+        <input type="button" value="Generate Prefix" onclick="generatePrefix()">
+    </form>
+
+    <p id="result"></p>
+
+    <script>
+        document.getElementById("hasTransition").addEventListener("input", function() {
+            const transitionDiv = document.getElementById("transitionColourDiv");
+            if (this.value.toLowerCase() === "yes") {
+                transitionDiv.style.display = "block";
+            } else {
+                transitionDiv.style.display = "none";
+            }
+        });
+
+        function generatePrefix() {
+            let resultText = "";
+            const bracketColour = '{#light_gray}';
+
+            const username = document.getElementById("username").value;
+            const textToColour = document.getElementById("textToColour").value;
+
+            let colourA = document.getElementById("colourA").value;
+            colourA = "{#" + colourA + ">}";
+
+            let colourB = document.getElementById("colourB").value;
+            colourB = "{#" + colourB + "<}";
+
+            const hasTransition = document.getElementById("hasTransition").value.toLowerCase();
+
+            let colours;
+            if (hasTransition === "yes") {
+                let colourC = document.getElementById("colourC").value;
+                colourC = "{#" + colourC + "<>}";
+                colours = [colourA, colourC, colourB];
+            } else {
+                colours = [colourA, colourB];
+            }
+
+            if (hasTransition !== "yes") {
+                resultText += `${bracketColour}[${colourA}${textToColour}${colourB}${bracketColour}]§r`;
+            } else {
+                const split1 = textToColour.slice(0, Math.ceil(textToColour.length / 2));
+                const split2 = textToColour.slice(Math.ceil(textToColour.length / 2));
+                resultText += `${bracketColour}[${colourA}${split1}${colours[1]}${split2}${colourB}${bracketColour}]§r`;
+            }
+
+            document.getElementById("result").textContent = `This is the resulting prefix: ${resultText}`;
+            console.log("This is the command to change their prefix.");
+            console.log(`/lp user ${username} meta setprefix ${resultText}`);
+        }
+
+        // Call the function with example values for testing
+        generatePrefix('kenobi_luke', 'Coach', 'red', 'brightturquoise', 'yes', '6fe37f');
+    </script>
+</body>
+</html>
