@@ -8,84 +8,109 @@
         @import url('https://fonts.googleapis.com/css2?family=Ginto:wght@400;700&display=swap');
 
         body {
-            background: linear-gradient(20deg, #003049, #D62828);
-            background-size: cover;
-            color: #EAE2B7;
+            background: linear-gradient(20deg, #FF8811, #392F5A);
+            background-size: 200% 200%;
+            color: #FAEBD7; /* Antique White */
             font-family: 'Ginto', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
         }
         button {
             margin-top: 10px;
             padding: 10px 20px;
-            background-color: #FCBF49;
+            background-color: #FF8811; /* Bright Orange */
             color: white;
             border: none;
             border-radius: 12px;
             cursor: pointer;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transition: opacity 0.5s ease-in-out, background-color 0.3s;
         }
         button:hover {
-            background-color: #FCA136;
+            background-color: #CC6F00; /* Darker Orange */
         }
         input[type="text"] {
-            background-color: #5C9EAD;
-            color: #EAE2B7;
+            background-color: #392F5A; /* Dark Purple */
+            color: #FAEBD7; /* Antique White */
             border: none;
             border-radius: 12px;
             padding: 10px;
-            width: 100%;
+            font-size: 1.1em;
+            width: 80%; /* Reduced width */
             box-sizing: border-box;
         }
         input[type="button"] {
-            background-color: #FCBF49;
-            color: #003049;
+            background-color: #FF8811; /* Bright Orange */
+            color: #FAEBD7; /* Antique White */
             border: none;
             border-radius: 12px;
             padding: 10px;
+            margin-top: 20px; /* Add margin-top for padding */
             width: 100%;
             box-sizing: border-box;
             cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        input[type="button"]:hover {
+            background-color: #CC6F00; /* Darker Orange */
         }
         label {
             display: block;
             margin-top: 10px;
         }
-        #result, #command, #copyResultBtn, #copyCommandBtn {
+        #resultContainer {
+            height: 0;
+            overflow: hidden;
             opacity: 0;
-            transition: opacity 0.5s ease-in-out;
+            transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+        }
+        .container {
+            text-align: center;
+            width: 80%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
         }
     </style>
 </head>
 <body>
-    <h1>Prefix Generator</h1>
-    <form id="prefixForm">
-        <label for="username">What is the player's username? (e.g., kenobi_luke):</label>
-        <input type="text" id="username" name="username"><br>
+    <div class="container">
+        <h1>Prefix Generator</h1>
+        <form id="prefixForm">
+            <label for="username">What is the player's username? (e.g., kenobi_luke):</label>
+            <input type="text" id="username" name="username"><br>
 
-        <label for="textToColour">What rank is the player? (e.g., Coach, Trial_Admin, Mod):</label>
-        <input type="text" id="textToColour" name="textToColour"><br>
+            <label for="textToColour">What rank is the player? (e.g., Coach, Trial_Admin, Mod):</label>
+            <input type="text" id="textToColour" name="textToColour"><br>
 
-        <label for="colourA">What is the desired starting colour? (e.g., red, brightturquoise, 6fe37f):</label>
-        <input type="text" id="colourA" name="colourA"><br>
+            <label for="colourA">What is the desired starting colour? (e.g., red, brightturquoise, 6fe37f):</label>
+            <input type="text" id="colourA" name="colourA"><br>
 
-        <label for="colourB">What is the desired ending colour?</label>
-        <input type="text" id="colourB" name="colourB"><br>
+            <label for="colourB">What is the desired ending colour?</label>
+            <input type="text" id="colourB" name="colourB"><br>
 
-        <label for="hasTransition">Does the player want a transition colour? (yes/no):</label>
-        <input type="text" id="hasTransition" name="hasTransition"><br>
+            <label for="hasTransition">Does the player want a transition colour? (yes/no):</label>
+            <input type="text" id="hasTransition" name="hasTransition"><br>
 
-        <div id="transitionColourDiv" style="display: none;">
-            <label for="colourC">What is the desired transition colour?</label>
-            <input type="text" id="colourC" name="colourC"><br>
+            <div id="transitionColourDiv" style="display: none;">
+                <label for="colourC">What is the desired transition colour?</label>
+                <input type="text" id="colourC" name="colourC"><br>
+            </div>
+
+            <input type="button" value="Generate Prefix" onclick="generatePrefix()"><br><br>
+        </form>
+
+        <div id="resultContainer">
+            <p id="result" style="margin-bottom: 20px;"></p>
+            <button id="copyResultBtn" onclick="copyToClipboard('result')">Copy Result</button>
+            <p id="command" style="margin-bottom: 20px;"></p>
+            <button id="copyCommandBtn" onclick="copyToClipboard('command')">Copy Command</button>
         </div>
-
-        <input type="button" value="Generate Prefix" onclick="generatePrefix()">
-    </form>
-
-    <p id="result"></p>
-    <button id="copyResultBtn" onclick="copyToClipboard('result')">Copy Result</button>
-    <p id="command"></p>
-    <button id="copyCommandBtn" onclick="copyToClipboard('command')">Copy Command</button>
+    </div>
 
     <script>
         document.getElementById("hasTransition").addEventListener("input", function() {
@@ -138,11 +163,9 @@
                 console.error("Command element not found.");
             }
 
-            // Show and animate the result and copy buttons
-            resultElement.style.opacity = 1;
-            document.getElementById("copyResultBtn").style.opacity = 1;
-            commandElement.style.opacity = 1;
-            document.getElementById("copyCommandBtn").style.opacity = 1;
+            const resultContainer = document.getElementById("resultContainer");
+            resultContainer.style.height = "auto"; // Trigger the transition
+            resultContainer.style.opacity = 1;
         }
 
         function copyToClipboard(elementId) {
