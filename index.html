@@ -147,11 +147,11 @@
             }
 
             if (hasTransition !== "yes") {
-                resultText += `${bracketColour}[${colourA}${textToColour}${colourB}${bracketColour}]§r`;
+                resultText += `${bracketColour}[${colourA}${textToColour}${colourB}${bracketColour}]&f`;
             } else {
                 const split1 = textToColour.slice(0, Math.ceil(textToColour.length / 2));
                 const split2 = textToColour.slice(Math.ceil(textToColour.length / 2));
-                resultText += `${bracketColour}[${colourA}${split1}${colours[1]}${split2}${colourB}${bracketColour}]§r`;
+                resultText += `${bracketColour}[${colourA}${split1}${colours[1]}${split2}${colourB}${bracketColour}]&f`;
             }
 
             const resultElement = document.getElementById("result");
