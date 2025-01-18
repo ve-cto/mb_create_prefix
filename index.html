@@ -8,7 +8,7 @@
         @import url('https://fonts.googleapis.com/css2?family=Ginto:wght@400;700&display=swap');
 
         body {
-            background: linear-gradient(20deg, #FF8811, #392F5A);
+            background: linear-gradient(20deg, var(--colourA), var(--colourB));
             background-size: 200% 200%;
             color: #FAEBD7; /* Antique White */
             font-family: 'Ginto', sans-serif;
@@ -122,6 +122,22 @@
             }
         });
 
+        function generateRandomColor() {
+            const letters = '0123456789ABCDEF';
+            let color = '#';
+            for (let i = 0; i < 6; i++) {
+                color += letters[Math.floor(Math.random() * 16)];
+            }
+            return color;
+        }
+
+        function setRandomBackground() {
+            const colourA = generateRandomColor();
+            const colourB = generateRandomColor();
+            document.body.style.setProperty('--colourA', colourA);
+            document.body.style.setProperty('--colourB', colourB);
+        }
+
         function generatePrefix() {
             let resultText = "";
             const bracketColour = '{#gray}';
@@ -176,6 +192,9 @@
                 console.error('Failed to copy text: ', err);
             });
         }
+
+        // Set a random gradient background on page load
+        window.onload = setRandomBackground;
     </script>
 </body>
 </html>
