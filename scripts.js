@@ -1,3 +1,4 @@
+// Function to generate a random color
 function generateRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -7,6 +8,7 @@ function generateRandomColor() {
     return color;
 }
 
+// Function to set a random background color
 function setRandomBackground() {
     const colourA = generateRandomColor();
     const colourB = generateRandomColor();
@@ -19,6 +21,7 @@ window.onload = function() {
     setRandomBackground();
 };
 
+// Show or hide the transition colour input based on the user's choice
 document.getElementById("hasTransition").addEventListener("input", function() {
     const transitionDiv = document.getElementById("transitionColourDiv");
     if (this.value.toLowerCase() === "yes") {
@@ -28,6 +31,7 @@ document.getElementById("hasTransition").addEventListener("input", function() {
     }
 });
 
+// Generate the prefix and display it
 function generatePrefix() {
     let resultText = "";
     const bracketColour = '{#gray}';
@@ -61,22 +65,26 @@ function generatePrefix() {
     }
 
     const resultElement = document.getElementById("result");
-    resultElement.innerHTML = `This is the resulting prefix:<br>${resultText}`;
+    resultElement.innerHTML = `${resultText}`;
     const commandElement = document.getElementById("command");
     if (commandElement) {
-        commandElement.innerHTML = `This is the command to change their prefix:<br>/lp user ${username} meta setprefix ${resultText}`;
+        commandElement.innerHTML = `/lp user ${username} meta setprefix ${resultText}`;
     } else {
         console.error("Command element not found.");
     }
 
-    const resultContainer = document.getElementById("resultContainer");
-    resultContainer.style.height = "auto"; // Trigger the transition
-    resultContainer.style.opacity = 1;
+    // Make the copy buttons visible
+    document.getElementById("copyResultBtn").style.display = 'inline-block';
+    document.getElementById("copyCommandBtn").style.display = 'inline-block';
 }
 
+// Copy the inner text of an element to the clipboard
 function copyToClipboard(elementId) {
-    const text = document.getElementById(elementId).innerText;
-    navigator.clipboard.writeText(text).then(function() {
+    const textElement = document.getElementById(elementId);
+    const text = textElement ? textElement.innerText : '';
+    const prefix = text.split('<br>')[1] || text; // Extract the prefix
+
+    navigator.clipboard.writeText(prefix).then(function() {
         console.log('Text copied to clipboard');
     }).catch(function(err) {
         console.error('Failed to copy text: ', err);
