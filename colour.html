@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prefix Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="navbar">
+        <a href="https://ve-cto.github.io/mb_create_prefix/index.html"><img src="home-icon.png" alt="Home" width="24" height="24"></a>
+        <a href="https://ve-cto.github.io/mb_create_prefix/prefix.html">Prefix Creator</a>
+    </div>
+    <div class="container">
+        <h1>Coloured String Creator</h1>
+        <h4>Including transition colours are optional.</h4>
+        <form id="prefixForm">
+            <label for="textToColour">What text should be coloured?</label>
+            <input type="text" id="textToColour" name="textToColour"><br>
+
+            <label for="colour1">What is the desired starting colour? (e.g., red, brightturquoise, 6fe37f):</label>
+            <input type="text" id="colour1" name="colour1"><br>
+
+            <label for="colour2">Transition Colour 1 (Left): </label>
+            <input type="text" id="colour2" name="colour2"><br>
+
+            <label for="colour3">Transition Colour 2 (Middle): </label>
+            <input type="text" id="colour3" name="colour3"><br>
+
+            <label for="colour4">Transition Colour 3 (Right): </label>
+            <input type="text" id="colour4" name="colour4"><br>
+
+            <label for="colour5">What is the desired ending colour?</label>
+            <input type="text" id="colour5" name="colour5"><br>
+
+            <input type="button" value="Generate String" onclick="generateColours()"><br><br>
+        </form>
+        <div id="result" style="margin-top: 20px;"></div>
+    </div>
+
+    <script src="scripts.js"></script>
+</body>
+</html>

@@ -17,6 +17,7 @@ function setRandomBackground() {
 // Call setRandomBackground on page load for all pages
 window.onload = function() {
     setRandomBackground();
+    print("load")
 };
 
 document.getElementById("hasTransition").addEventListener("input", function() {
@@ -73,6 +74,67 @@ function generatePrefix() {
     resultContainer.style.height = "auto"; // Trigger the transition
     resultContainer.style.opacity = 1;
 }
+
+function generateColours() {
+    let resultText = "";
+    const bracketColour = '{#gray}';
+
+    // const username = document.getElementById("username").value;
+    const textToColour = document.getElementById("textToColour").value;
+
+    let colour1 = document.getElementById("colour1").value;
+    colour1 = "{#" + colour1 + ">}";
+
+    let colour2 = document.getElementById("colour2").value;
+    if (colour2 !== '') {
+        colour2 = "{#" + colour2 + "<>}";
+    }
+
+    let colour3 = document.getElementById("colour3").value;
+    if (colour3 !== '') {
+        colour3 = "{#" + colour3 + "<>}";
+    }
+
+    let colour4 = document.getElementById("colour4").value;
+    if (colour4 !== '') {
+        colour4 = "{#" + colour4 + "<>}";
+    }
+
+    let colour5 = document.getElementById("colour5").value;
+    colour5 = "{#" + colour5 + "<}";
+
+    let colours = [colour1, colour2, colour3, colour4, colour5];
+
+    // Create the initial resultText
+    // resultText += `${colour1}${textToColour}${colour5}`;
+
+    // Split textToColour into equal parts based on the number of colours
+    let split = [];
+    let partLength = Math.ceil(textToColour.length / colours.length);
+    for (let index = 0; index < colours.length; index++) {
+        split[index] = textToColour.slice(index * partLength, (index + 1) * partLength);
+        resultText += `${colours[index]}${split[index]}`;
+    }
+
+    // Display the result
+    const resultElement = document.getElementById("result");
+    resultElement.innerHTML = `This is the resulting string:<br>${resultText}`;
+
+    const commandElement = document.getElementById("command");
+    if (commandElement) {
+        commandElement.innerHTML = `${resultText}`;
+    } else {
+        console.error("Command element not found.");
+    }
+
+    const resultContainer = document.getElementById("resultContainer");
+    resultContainer.style.height = "auto"; // Trigger the transition
+    resultContainer.style.opacity = 1;
+}
+
+
+
+
 
 function copyToClipboard(elementId) {
     const text = document.getElementById(elementId).innerText;
