@@ -17,7 +17,7 @@ function setRandomBackground() {
 // Call setRandomBackground on page load for all pages
 window.onload = function() {
     setRandomBackground();
-    print("load")
+    // print("load")
 };
 
 document.getElementById("hasTransition").addEventListener("input", function() {
