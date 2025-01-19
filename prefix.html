@@ -13,6 +13,8 @@
     </div>
     <div class="container">
         <h1>Prefix Creator</h1>
+        <button id="randomizeButton" onclick="randomizePrefixColour()">Randomize</form>
+            
         <form id="prefixForm">
             <label for="username">What is the player's username? (e.g., kenobi_luke):</label>
             <input type="text" id="username" name="username"><br>
@@ -39,10 +41,10 @@
 
         <div id="resultContainer">
             <p id="result" style="margin-bottom: 100px;"></p>
-            <button id="copyResultBtn" style="display: none;" onclick="copyToClipboard('result')">Copy Result</button>
+            <button id="copyResultBtn" onclick="copyToClipboard('result')">Copy Result</button>
 
             <p id="command" style="margin-bottom: 100px;"></p>
-            <button id="copyCommandBtn" style="display: none;" onclick="copyToClipboard('command')">Copy Command</button>
+            <button id="copyCommandBtn" onclick="copyToClipboard('command')">Copy Command</button>
         </div>
     </div>
 
