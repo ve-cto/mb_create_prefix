@@ -29,32 +29,25 @@ window.onload = function() {
 };
 
 function generatePrefix() {
-    console.log("Generate Prefix button clicked.");
-
     let resultText = "";
     const bracketColour = '{#gray}';
 
     const username = document.getElementById("username").value;
     const textToColour = document.getElementById("textToColour").value;
-    console.log("Username:", username, "TextToColour:", textToColour);
 
     let colourA = document.getElementById("colourA").value;
     colourA = `{#${colourA}>}`;
-    console.log("ColourA:", colourA);
 
     let colourB = document.getElementById("colourB").value;
     colourB = `{#${colourB}<}`;
-    console.log("ColourB:", colourB);
 
     const hasTransition = document.getElementById("hasTransition").value.toLowerCase();
-    console.log("HasTransition:", hasTransition);
 
     let colours;
     if (hasTransition === "yes") {
         let colourC = document.getElementById("colourC").value;
         colourC = `{#${colourC}<>)}`;
         colours = [colourA, colourC, colourB];
-        console.log("ColourC:", colourC);
     } else if (randomize) {
         colourA = generateRandomColor();
         colourB = generateRandomColor();
@@ -64,7 +57,6 @@ function generatePrefix() {
     } else {
         colours = [colourA, colourB];
     }
-    console.log("Colours:", colours);
 
     if (hasTransition !== "yes") {
         resultText += `${bracketColour}[${colourA}${textToColour}${colourB}${bracketColour}]&f`;
@@ -73,7 +65,6 @@ function generatePrefix() {
         const split2 = textToColour.slice(Math.ceil(textToColour.length / 2));
         resultText += `${bracketColour}[${colourA}${split1}${colours[1]}${split2}${colourB}${bracketColour}]&f`;
     }
-    console.log("ResultText:", resultText);
 
     const resultElement = document.getElementById("result");
     resultElement.innerHTML = resultText;
@@ -88,7 +79,6 @@ function generatePrefix() {
     document.getElementById("copyCommandBtn").style.display = 'inline-block';
     randomize = false;
 }
-
 
 function copyToClipboard(elementId) {
     const textElement = document.getElementById(elementId).innerText;
