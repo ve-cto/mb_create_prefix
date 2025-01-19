@@ -1,3 +1,5 @@
+let randomize = false;
+
 function generateRandomColor() {
     const letters = '0123456789ABCDEF';
     let color = '#';
@@ -14,19 +16,17 @@ function setRandomBackground() {
     document.body.style.setProperty('--colourB', colourB);
 }
 
-// Call setRandomBackground on page load for all pages
 window.onload = function() {
     setRandomBackground();
+    document.getElementById("hasTransition").addEventListener("input", function() {
+        const transitionDiv = document.getElementById("transitionColourDiv");
+        if (this.value.toLowerCase() === "yes") {
+            transitionDiv.style.display = "block";
+        } else {
+            transitionDiv.style.display = "none";
+        }
+    });
 };
-
-document.getElementById("hasTransition").addEventListener("input", function() {
-    const transitionDiv = document.getElementById("transitionColourDiv");
-    if (this.value.toLowerCase() === "yes") {
-        transitionDiv.style.display = "block";
-    } else {
-        transitionDiv.style.display = "none";
-    }
-});
 
 function generatePrefix() {
     let resultText = "";
@@ -36,26 +36,24 @@ function generatePrefix() {
     const textToColour = document.getElementById("textToColour").value;
 
     let colourA = document.getElementById("colourA").value;
-    colourA = "{#" + colourA + ">}";
+    colourA = `{#${colourA}>}`;
 
     let colourB = document.getElementById("colourB").value;
-    colourB = "{#" + colourB + "<}";
-    
+    colourB = `{#${colourB}<}`;
 
     const hasTransition = document.getElementById("hasTransition").value.toLowerCase();
 
     let colours;
     if (hasTransition === "yes") {
         let colourC = document.getElementById("colourC").value;
-        colourC = "{#" + colourC + "<>}";
+        colourC = `{#${colourC}<>)}`;
         colours = [colourA, colourC, colourB];
-    } else if (randomize == true) {
+    } else if (randomize) {
         colourA = generateRandomColor();
         colourB = generateRandomColor();
-        colourA = "{" + colourA + ">}";
-        colourB = "{" + colourB + "<}";
+        colourA = `{${colourA}>}`;
+        colourB = `{${colourB}<}`;
         colours = [colourA, colourB];
-
     } else {
         colours = [colourA, colourB];
     }
@@ -77,15 +75,14 @@ function generatePrefix() {
         console.error("Command element not found.");
     }
 
-    // Make the copy buttons visible
     document.getElementById("copyResultBtn").style.display = 'inline-block';
     document.getElementById("copyCommandBtn").style.display = 'inline-block';
-    randomize = false
+    randomize = false;
 }
 
 function copyToClipboard(elementId) {
     const textElement = document.getElementById(elementId).innerText;
-    const text = textElement.split('<br>')[1] || textElement; // Extract the prefix or command
+    const text = textElement.split('<br>')[1] || textElement;
 
     navigator.clipboard.writeText(text).then(function() {
         console.log('Text copied to clipboard');
@@ -94,7 +91,7 @@ function copyToClipboard(elementId) {
     });
 }
 
-function randomizePrefixColour() {   
-    randomize = true
-    generatePrefix()
+function randomizePrefixColour() {
+    randomize = true;
+    generatePrefix();
 }
