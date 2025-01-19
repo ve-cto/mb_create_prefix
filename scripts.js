@@ -40,7 +40,6 @@ function generatePrefix() {
 
     let colourB = document.getElementById("colourB").value;
     colourB = "{#" + colourB + "<}";
-    
 
     const hasTransition = document.getElementById("hasTransition").value.toLowerCase();
 
@@ -49,13 +48,6 @@ function generatePrefix() {
         let colourC = document.getElementById("colourC").value;
         colourC = "{#" + colourC + "<>}";
         colours = [colourA, colourC, colourB];
-    } else if (randomize == true) {
-        colourA = generateRandomColor();
-        colourB = generateRandomColor();
-        colourA = "{" + colourA + ">}";
-        colourB = "{" + colourB + "<}";
-        colours = [colourA, colourB];
-
     } else {
         colours = [colourA, colourB];
     }
@@ -80,7 +72,6 @@ function generatePrefix() {
     // Make the copy buttons visible
     document.getElementById("copyResultBtn").style.display = 'inline-block';
     document.getElementById("copyCommandBtn").style.display = 'inline-block';
-    randomize = false
 }
 
 function copyToClipboard(elementId) {
@@ -92,9 +83,4 @@ function copyToClipboard(elementId) {
     }).catch(function(err) {
         console.error('Failed to copy text: ', err);
     });
-}
-
-function randomizePrefixColour() {   
-    randomize = true
-    generatePrefix()
 }
