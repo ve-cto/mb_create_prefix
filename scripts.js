@@ -177,9 +177,19 @@ function copyToClipboard(elementId) {
     const textElement = document.getElementById(elementId);
 
     if (textElement) {
+        // Get the text content
+        let textContent = textElement.textContent;
+
+        // Find the position of the first occurrence of '&'
+        const prefixIndex = textContent.indexOf('&');
+        if (prefixIndex !== -1) {
+            // Update the text content to start from the first occurrence of '&'
+            textContent = textContent.substring(prefixIndex);
+        }
+
         // Create a temporary textarea element to copy the text
         const tempTextArea = document.createElement("textarea");
-        tempTextArea.value = textElement.textContent;
+        tempTextArea.value = textContent;
 
         // Append the textarea element to the body
         document.body.appendChild(tempTextArea);
