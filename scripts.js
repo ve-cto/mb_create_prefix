@@ -92,17 +92,22 @@ function generatePrefix() {
             }
         }
 
-        const colourA = getHexColor(document.getElementById("colourA").value);
-        const colourB = getHexColor(document.getElementById("colourB").value);
+        const colourA = `#${getHexColor(document.getElementById("colourA").value)}`;
+        const colourB = `#${getHexColor(document.getElementById("colourB").value)}`;
 
-        const gradientColors = generateGradient(`#${colourA}`, `#${colourB}`, textToColour.length);
+        const gradientColors = generateGradient(colourA, colourB, textToColour.length);
 
-        const coloredRank = Array.from(textToColour).map((char, index) => `&#${gradientColors[index].toUpperCase()}${char}`).join('');
+        // Generate colored rank without introducing unwanted characters
+        const coloredRank = Array.from(textToColour).map((char, index) => `&#${gradientColors[index].toUpperCase()};${char}`).join('');
 
         const resultText = `&7[${coloredRank}&7]&r`;
 
         document.getElementById("result").innerHTML = `This is the resulting prefix:<br>${resultText}`;
         document.getElementById("command").innerHTML = `This is the command to change their prefix:<br>/lp user ${username} meta setprefix ${resultText}`;
+        
+        // Print the generated output to console
+        console.log("Generated prefix:", resultText);
+        console.log("Generated command:", `/lp user ${username} meta setprefix ${resultText}`);
         
         // Ensure the result container is visible
         const resultContainer = document.getElementById("resultContainer");
