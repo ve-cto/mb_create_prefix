@@ -98,12 +98,12 @@ function generatePrefix() {
         const gradientColors = generateGradient(colourA, colourB, textToColour.length);
 
         // Generate colored rank without introducing unwanted characters
-        const coloredRank = Array.from(textToColour).map((char, index) => `&#${gradientColors[index].toUpperCase()};${char}`).join('');
+        const coloredRank = Array.from(textToColour).map((char, index) => `&#${gradientColors[index].toUpperCase()}${char}`).join('');
 
         const resultText = `&7[${coloredRank}&7]&r`;
 
-        document.getElementById("result").innerHTML = `This is the resulting prefix:<br>${resultText}`;
-        document.getElementById("command").innerHTML = `This is the command to change their prefix:<br>/lp user ${username} meta setprefix ${resultText}`;
+        document.getElementById("result").textContent = resultText;
+        document.getElementById("command").textContent = `/lp user ${username} meta setprefix ${resultText}`;
         
         // Print the generated output to console
         console.log("Generated prefix:", resultText);
@@ -159,11 +159,11 @@ function generateColours() {
 
     // Display the result
     const resultElement = document.getElementById("result");
-    resultElement.innerHTML = `This is the resulting string:<br>${resultText}`;
+    resultElement.textContent = resultText;
 
     const commandElement = document.getElementById("command");
     if (commandElement) {
-        commandElement.innerHTML = `${resultText}`;
+        commandElement.textContent = resultText;
     } else {
         console.error("Command element not found.");
     }
@@ -174,10 +174,28 @@ function generateColours() {
 }
 
 function copyToClipboard(elementId) {
-    const text = document.getElementById(elementId).innerText;
-    navigator.clipboard.writeText(text).then(function() {
+    const textElement = document.getElementById(elementId);
+
+    if (textElement) {
+        // Create a temporary textarea element to copy the text
+        const tempTextArea = document.createElement("textarea");
+        tempTextArea.value = textElement.textContent;
+
+        // Append the textarea element to the body
+        document.body.appendChild(tempTextArea);
+
+        // Select the text content
+        tempTextArea.select();
+        tempTextArea.setSelectionRange(0, 99999); // For mobile devices
+
+        // Copy the selected text
+        document.execCommand("copy");
+
+        // Remove the temporary textarea element
+        document.body.removeChild(tempTextArea);
+
         console.log('Text copied to clipboard');
-    }).catch(function(err) {
-        console.error('Failed to copy text: ', err);
-    });
+    } else {
+        console.error("Failed to copy text: Element not found.");
+    }
 }
