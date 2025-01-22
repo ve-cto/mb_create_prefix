@@ -1,10 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Prefix Generator</title>
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/tinycolor/1.4.2/tinycolor.min.js"></script>
+    <script src="scripts.js"></script>
 </head>
 <body>
     <div class="navbar">
@@ -27,14 +31,6 @@
             <label for="colourB">What is the desired ending colour?</label>
             <input type="text" id="colourB" name="colourB"><br>
 
-            <label for="hasTransition">Does the player want a transition colour? (yes/no):</label>
-            <input type="text" id="hasTransition" name="hasTransition"><br>
-
-            <div id="transitionColourDiv" style="display: none;">
-                <label for="colourC">What is the desired transition colour?</label>
-                <input type="text" id="colourC" name="colourC"><br>
-            </div>
-
             <input type="button" value="Generate Prefix" onclick="generatePrefix()"><br><br>
         </form>
 
@@ -45,7 +41,5 @@
             <button id="copyCommandBtn" onclick="copyToClipboard('command')">Copy Command</button>
         </div>
     </div>
-
-    <script src="scripts.js"></script>
 </body>
 </html>
