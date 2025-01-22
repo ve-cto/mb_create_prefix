@@ -175,12 +175,15 @@ function generateColours() {
 
 function copyToClipboard(elementId) {
     const textElement = document.getElementById(elementId);
+    console.log(textElement);
 
     if (textElement) {
         // Get the text content
         let textContent = textElement.textContent;
+        console.log(textContent);
 
         if (elementId === "result") {
+            console.log("result ID did the thing");
             // Find the position of the first occurrence of '&' for the result element
             const prefixIndex = textContent.indexOf('&');
             if (prefixIndex !== -1) {
@@ -206,6 +209,8 @@ function copyToClipboard(elementId) {
         // Remove the temporary textarea element
         document.body.removeChild(tempTextArea);
 
+        console.log("text to copy...");
+        console.log(document);
         console.log('Text copied to clipboard');
     } else {
         console.error("Failed to copy text: Element not found.");
