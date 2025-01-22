@@ -6,6 +6,7 @@ body {
     color: #FAEBD7; /* Antique White */
     font-family: 'Ginto', sans-serif;
     display: flex;
+    flex-direction: column; /* Add this line */
     justify-content: center;
     align-items: center;
     height: 100vh;
@@ -99,4 +100,13 @@ pre {
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    flex: 1; /* Add this line */
+}
+
+footer {
+    text-align: center; 
+    padding: 10px;
+    background-color: rgba(0, 0, 0, 0.7); /* Semi-transparent background to match the navbar */
+    color: #FAEBD7; /* Antique White text color */
+    width: 100%;
 }
