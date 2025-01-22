@@ -44,7 +44,7 @@ button {
     border: none;
     border-radius: 12px;
     cursor: pointer;
-    opacity: 0;
+    opacity: 1; /* Ensure buttons are fully visible */
     transition: opacity 0.5s ease-in-out, background-color 0.3s;
 }
 button:hover {
@@ -80,10 +80,16 @@ label {
     margin-top: 10px;
 }
 #resultContainer {
-    height: 0;
+    height: auto; /* Ensure the container is automatically sized */
     overflow: hidden;
-    opacity: 0;
+    opacity: 1; /* Ensure the container is visible */
     transition: height 0.5s ease-in-out, opacity 0.5s ease-in-out;
+}
+#result, #command {
+    background-color: #392F5A; /* Dark Purple */
+    padding: 10px;
+    border-radius: 12px;
+    margin-bottom: 10px;
 }
 .container {
     text-align: center;

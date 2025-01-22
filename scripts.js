@@ -44,11 +44,12 @@ function findHexValue(colorsDict, colorName) {
     }
 
     const formattedColorName = colorName.replace('_', '').toLowerCase();
+
+    // Reduce console log output
     console.log(`Searching for: '${formattedColorName}'`);
 
     for (const color in colorsDict) {
         const hexCode = colorsDict[color];
-        console.log(`Checking color: '${color.replace('_', '').toLowerCase()}'`);
         if (color.replace('_', '').toLowerCase() === formattedColorName) {
             return hexCode;
         }
@@ -102,6 +103,11 @@ function generatePrefix() {
 
         document.getElementById("result").innerHTML = `This is the resulting prefix:<br>${resultText}`;
         document.getElementById("command").innerHTML = `This is the command to change their prefix:<br>/lp user ${username} meta setprefix ${resultText}`;
+        
+        // Ensure the result container is visible
+        const resultContainer = document.getElementById("resultContainer");
+        resultContainer.style.height = "auto";
+        resultContainer.style.opacity = 1;
     });
 }
 
