@@ -180,11 +180,13 @@ function copyToClipboard(elementId) {
         // Get the text content
         let textContent = textElement.textContent;
 
-        // Find the position of the first occurrence of '&'
-        const prefixIndex = textContent.indexOf('&');
-        if (prefixIndex !== -1) {
-            // Update the text content to start from the first occurrence of '&'
-            textContent = textContent.substring(prefixIndex);
+        if (elementId === "result") {
+            // Find the position of the first occurrence of '&' for the result element
+            const prefixIndex = textContent.indexOf('&');
+            if (prefixIndex !== -1) {
+                // Update the text content to start from the first occurrence of '&'
+                textContent = textContent.substring(prefixIndex);
+            }
         }
 
         // Create a temporary textarea element to copy the text
@@ -209,3 +211,4 @@ function copyToClipboard(elementId) {
         console.error("Failed to copy text: Element not found.");
     }
 }
+
