@@ -74,7 +74,7 @@ def main():
     # Assign each character in the rank a color from the gradient
     colored_rank = ''.join(f"&#{color}{char}" for color, char in zip(gradient_colors, text_to_colour))
     
-    result_text = f"&7[{colored_rank}&7]&r"
+    result_text = f"&7[{colored_rank}&7]&f"
 
     print("This is the resulting prefix. ")
     print(result_text)
