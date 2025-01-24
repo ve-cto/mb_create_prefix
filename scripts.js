@@ -98,7 +98,7 @@ function generatePrefix() {
         const gradientColors = generateGradient(colourA, colourB, textToColour.length);
 
         // Generate colored rank without introducing unwanted characters
-        const coloredRank = Array.from(textToColour).map((char, index) => `{#${gradientColors[index].toUpperCase()}${char}}`).join('');
+        const coloredRank = Array.from(textToColour).map((char, index) => `{#${gradientColors[index].toUpperCase()}}${char}`).join('');
 
         const resultText = `&7[${coloredRank}&7]&r`;
 
