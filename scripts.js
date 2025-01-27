@@ -94,6 +94,9 @@ function generatePrefix() {
 
         const colourA = `#${getHexColor(document.getElementById("colourA").value)}`;
         const colourB = `#${getHexColor(document.getElementById("colourB").value)}`;
+        document.body.style.setProperty('--colourA', colourA);
+        document.body.style.setProperty('--colourB', colourB);
+
 
         const gradientColors = generateGradient(colourA, colourB, textToColour.length);
 
@@ -118,7 +121,6 @@ function generatePrefix() {
 
 function generateColours() {
     let resultText = "";
-    const bracketColour = '{#gray}';
 
     // const username = document.getElementById("username").value;
     const textToColour = document.getElementById("textToColour").value;
