@@ -119,6 +119,11 @@ function generatePrefix() {
     });
 }
 
+function clearPrefixContents() {
+    document.getElementById('colourA').reset()
+    document.getElememtById('colourB').reset()
+}
+
 function generateColours() {
     let resultText = "";
 
