@@ -153,6 +153,7 @@ function generatePrefix() {
 function clearPrefixContents() {
     document.getElementById('colourA').reset();
     document.getElementById('colourB').reset();
+    document.getElementById('colourC').reset();
 }
 
 function generateColours() {
