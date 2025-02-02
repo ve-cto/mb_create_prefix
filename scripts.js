@@ -71,6 +71,28 @@ function generateGradient(startColor, endColor, steps) {
     return gradient;
 }
 
+function generateThreeColorGradient(startColor, middleColor, endColor, steps) {
+    const startToMiddleSteps = Math.ceil(steps / 2);
+    const middleToEndSteps = steps - startToMiddleSteps;
+
+    const start = new tinycolor(startColor);
+    const middle = new tinycolor(middleColor);
+    const end = new tinycolor(endColor);
+    const gradient = [];
+
+    for (let i = 0; i < startToMiddleSteps; i++) {
+        const color = tinycolor.mix(start, middle, (i / (startToMiddleSteps - 1)) * 100).toHex();
+        gradient.push(color);
+    }
+
+    for (let i = 0; i < middleToEndSteps; i++) {
+        const color = tinycolor.mix(middle, end, (i / (middleToEndSteps - 1)) * 100).toHex();
+        gradient.push(color);
+    }
+
+    return gradient;
+}
+
 function generatePrefix() {
     loadColors().then(colorsDict => {
         if (!colorsDict) {
@@ -94,11 +116,19 @@ function generatePrefix() {
 
         const colourA = `#${getHexColor(document.getElementById("colourA").value)}`;
         const colourB = `#${getHexColor(document.getElementById("colourB").value)}`;
+        const colourCInput = document.getElementById("colourC").value;
+
+        let gradientColors;
+        if (colourCInput) {
+            const colourC = `#${getHexColor(colourCInput)}`;
+            document.body.style.setProperty('--colourC', colourC);
+            gradientColors = generateThreeColorGradient(colourA, colourC, colourB, textToColour.length);
+        } else {
+            gradientColors = generateGradient(colourA, colourB, textToColour.length);
+        }
+
         document.body.style.setProperty('--colourA', colourA);
         document.body.style.setProperty('--colourB', colourB);
-
-
-        const gradientColors = generateGradient(colourA, colourB, textToColour.length);
 
         // Generate colored rank without introducing unwanted characters
         const coloredRank = Array.from(textToColour).map((char, index) => `{#${gradientColors[index].toUpperCase()}}${char}`).join('');
@@ -118,6 +148,7 @@ function generatePrefix() {
         resultContainer.style.opacity = 1;
     });
 }
+
 
 function clearPrefixContents() {
     document.getElementById('colourA').reset();
