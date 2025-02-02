@@ -133,7 +133,7 @@ function generatePrefix() {
         // Generate colored rank without introducing unwanted characters
         const coloredRank = Array.from(textToColour).map((char, index) => `{#${gradientColors[index].toUpperCase()}}${char}`).join('');
 
-        const resultText = `&7[${coloredRank}&7]&r`;
+        const resultText = `&7[${coloredRank}&7]&f`;
 
         document.getElementById("result").textContent = resultText;
         document.getElementById("command").textContent = `/lp user ${username} meta setprefix ${resultText}`;
