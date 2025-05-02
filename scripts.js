@@ -129,6 +129,7 @@ function generatePrefix() {
 
         document.body.style.setProperty('--colourA', colourA);
         document.body.style.setProperty('--colourB', colourB);
+        document.body.style.setProperty('--colourC', colourC);
 
         // Generate colored rank without introducing unwanted characters
         const coloredRank = Array.from(textToColour).map((char, index) => `{#${gradientColors[index].toUpperCase()}}${char}`).join('');

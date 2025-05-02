@@ -1,7 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Ginto:wght@400;700&display=swap');
 
 body {
-    background: linear-gradient(20deg, var(--colourA), var(--colourB));
+    background: linear-gradient(20deg, var(--colourA) 0%, var(--colourC) 50%, var(--colourB) 100%);
     background-size: cover;
     background-position: center center;
 
