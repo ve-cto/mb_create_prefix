@@ -14,7 +14,7 @@ function setRandomBackground() {
     document.body.style.setProperty('--colourB', colourB);
 }
 
-// Call setRandomBackground on page load for all pages
+// when page loads randomise the background colours
 window.onload = function() {
     setRandomBackground();
     // print("load")
@@ -45,7 +45,7 @@ function findHexValue(colorsDict, colorName) {
 
     const formattedColorName = colorName.replace('_', '').toLowerCase();
 
-    // Reduce console log output
+    // log searched colour
     console.log(`Searching for: '${formattedColorName}'`);
 
     for (const color in colorsDict) {
@@ -130,7 +130,7 @@ function generatePrefix() {
         document.body.style.setProperty('--colourA', colourA);
         document.body.style.setProperty('--colourB', colourB);
 
-        // Generate colored rank without introducing unwanted characters
+        // generate rank
         const coloredRank = Array.from(textToColour).map((char, index) => `{#${gradientColors[index].toUpperCase()}}${char}`).join('');
 
         const resultText = `&7[${coloredRank}&7]&f`;
@@ -138,11 +138,11 @@ function generatePrefix() {
         document.getElementById("result").textContent = resultText;
         document.getElementById("command").textContent = `/lp user ${username} meta setprefix ${resultText}`;
         
-        // Print the generated output to console
+        // log
         console.log("Generated prefix:", resultText);
         console.log("Generated command:", `/lp user ${username} meta setprefix ${resultText}`);
         
-        // Ensure the result container is visible
+        // make visible if not
         const resultContainer = document.getElementById("resultContainer");
         resultContainer.style.height = "auto";
         resultContainer.style.opacity = 1;
@@ -188,7 +188,7 @@ function generateColours() {
     // Create the initial resultText
     // resultText += `${colour1}${textToColour}${colour5}`;
 
-    // Split textToColour into equal parts based on the number of colours
+    // split the text into parts divided by num of colouras
     let split = [];
     let partLength = Math.ceil(textToColour.length / colours.length);
     for (let index = 0; index < colours.length; index++) {
@@ -208,7 +208,7 @@ function generateColours() {
     }
 
     const resultContainer = document.getElementById("resultContainer");
-    resultContainer.style.height = "auto"; // Trigger the transition
+    resultContainer.style.height = "auto"; // trigger
     resultContainer.style.opacity = 1;
 }
 
@@ -217,35 +217,32 @@ function copyToClipboard(elementId) {
     console.log(textElement);
 
     if (textElement) {
-        // Get the text content
         let textContent = textElement.textContent;
         console.log(textContent);
 
         if (elementId === "result") {
             console.log("result ID did the thing");
-            // Find the position of the first occurrence of '&' for the result element
             const prefixIndex = textContent.indexOf('&');
             if (prefixIndex !== -1) {
-                // Update the text content to start from the first occurrence of '&'
                 textContent = textContent.substring(prefixIndex);
             }
         }
 
-        // Create a temporary textarea element to copy the text
+        // area to copy text
         const tempTextArea = document.createElement("textarea");
         tempTextArea.value = textContent;
 
-        // Append the textarea element to the body
+        // append
         document.body.appendChild(tempTextArea);
 
-        // Select the text content
+        // select the text
         tempTextArea.select();
         tempTextArea.setSelectionRange(0, 99999); // For mobile devices
 
-        // Copy the selected text
+        // copy
         document.execCommand("copy");
 
-        // Remove the temporary textarea element
+        // remove temporary element
         document.body.removeChild(tempTextArea);
 
         console.log("text to copy...");

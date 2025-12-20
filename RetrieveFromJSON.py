@@ -17,15 +17,14 @@ def load_colors(json_file):
 def find_hex_value(colors_dict, color_name):
     if colors_dict is None:
         return None
-    # Remove underscores and convert to lowercase
+    # kill the underscores and lowercase
     formatted_color_name = color_name.replace('_', '').lower()
 
-    # Print the formatted color name
+    # log
     print(f"Searching for: '{formatted_color_name}'")
 
-    # Search for the hex value
+    # find the color
     for color, hex_code in colors_dict.items():
-        # Print each color being checked
         print(f"Checking color: '{color.replace('_', '').lower()}'")
         if color.replace('_', '').lower() == formatted_color_name:
             return hex_code
@@ -33,17 +32,17 @@ def find_hex_value(colors_dict, color_name):
     return None
 
 def main():
-    json_file = 'colors.json'  # Replace with your .json file path
+    json_file = 'colors.json' 
     colors_dict = load_colors(json_file)
 
     if colors_dict is None:
         print("Failed to load colors from JSON.")
         return
 
-    # Input color name
+    # color to find
     color_name = input("Enter the color name: ")
 
-    # Find the corresponding hex value
+    # get matching hex
     hex_value = find_hex_value(colors_dict, color_name)
 
     if hex_value:

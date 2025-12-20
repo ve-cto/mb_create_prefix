@@ -5,7 +5,7 @@ def load_colors(json_file):
     try:
         with open(json_file, 'r') as file:
             content = file.read()
-            print(f"File content: {content}")  # Print the file content
+            print(f"File content: {content}") 
             colors_dict = json.loads(content)
         return colors_dict
     except json.JSONDecodeError as e:
@@ -18,15 +18,14 @@ def load_colors(json_file):
 def find_hex_value(colors_dict, color_name):
     if colors_dict is None:
         return None
-    # Remove underscores and convert to lowercase
+    # kill underscores and convert to lowercase
     formatted_color_name = color_name.replace('_', '').lower()
 
-    # Print the formatted color name
+    # log the formatted color name
     print(f"Searching for: '{formatted_color_name}'")
-
-    # Search for the hex value
+    # find the color
     for color, hex_code in colors_dict.items():
-        # Print each color being checked
+        # log each color being checked
         print(f"Checking color: '{color.replace('_', '').lower()}'")
         if color.replace('_', '').lower() == formatted_color_name:
             return hex_code
@@ -40,7 +39,6 @@ def generate_gradient(start_color, end_color, steps):
     return [color.hex_l.lstrip('#') for color in gradient]
 
 def main():
-    # Load colors from JSON file
     json_file = 'colors.json'  
     colors_dict = load_colors(json_file)
 
@@ -68,10 +66,10 @@ def main():
     colourB = get_hex_color("What is the desired ending colour?: ")
     print("\n")
 
-    # Generate gradient for rank
+    # get gradient for rank
     gradient_colors = generate_gradient(colourA, colourB, len(text_to_colour))
 
-    # Assign each character in the rank a color from the gradient
+    # do the thingy
     colored_rank = ''.join(f"&#{color}{char}" for color, char in zip(gradient_colors, text_to_colour))
     
     result_text = f"&7[{colored_rank}&7]&f"
